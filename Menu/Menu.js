@@ -49,24 +49,11 @@ window.addEventListener("load",function(){
     div.append(ul);
     let menuBtn = document.querySelector(".menu-button");
     menuBtn.addEventListener("click", () => {
-      
       if (div.style.left == "-350px"){
         TweenLite.to(div,.5,{left:0});
       } else {
         TweenLite.to(div,.5,{left:-350});
       }
-
-      // if (!div.classList.contains("menu--open")) {
-      //   console.log("if");
-      //   div.classList.add("menu--open");
-      //   TweenLite.to(div, 1, {left:0});
-      // } else {
-      //   console.log("else");
-      //   TweenLite.to(div,1,{left:-350});
-      //   setTimeout(function(){
-      //     div.classList.remove("menu--open");
-      //   }, 1000);
-      // }
     });
     return div
   }
