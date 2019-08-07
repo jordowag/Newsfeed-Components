@@ -113,31 +113,21 @@ const data = [
 
 */
 window.addEventListener("load", function(event){
+  // Accepts array of articles, where each index of the array contains an object.
+  // This object has a title, date, firstPar,secondPar,thirdPar as properties.
   function createArticles(items) {
     let articles = items.map((item) => {
-      let div = document.createElement("div");
+      let div = articleComponents("div","");
       div.style.height = "50px";
       div.classList.add("article");
-      let h2 = document.createElement("h2");
-      h2.append(document.createTextNode(item.title));
-      let date = document.createElement("p");
+      let h2 = articleComponents("h2",item.title);
+      let date = articleComponents("p", item.date);
       date.classList.add("date");
-      date.append(document.createTextNode(item.date));
-      let p1 = document.createElement("p");
-      p1.append(document.createTextNode(item.firstParagraph));
-      let p2 = document.createElement("p");
-      p2.append(document.createTextNode(item.secondParagraph));
-      let p3 = document.createElement("p");
-      p3.append(document.createTextNode(item.thirdParagraph));
-      let button = document.createElement("span");
-      // let close = document.createElement("span");
-      // let open = document.createElement("span");
-      // close.textContent = "Click to close";
-      // open.textContent = "Click to open";
-      // close.classList.add("hidden");
-      // button.append(close,open);
+      let p1 = articleComponents("p", item.firstParagraph);
+      let p2 = articleComponents("p", item.secondParagraph);
+      let p3 = articleComponents("p", item.thirdParagraph);
+      let button = articleComponents("span", "Click to open");
       button.classList.add("expandButton");
-      button.textContent = "Click to open";
       button.addEventListener("click", (event) => {
         if (div.style.height == "50px") {
           TweenLite.to(div, 1, {height:400});
@@ -147,8 +137,7 @@ window.addEventListener("load", function(event){
           button.textContent = "Click to open";
         }
       });
-      let hideButton = document.createElement("span");
-      hideButton.textContent = "Close Article";
+      let hideButton = articleComponents("span", "Close Article");
       hideButton.classList.add("close-button");
       hideButton.addEventListener("click", (e) => {
         div.classList.add("hidden");
@@ -172,4 +161,12 @@ window.addEventListener("load", function(event){
   articles.forEach((article) => {
     articleSection.append(article);
   });
+
+  // type: STRING - tag name
+  // text: STRING - content inside tag, if applicable 
+  function articleComponents(type, text) {
+    let el = document.createElement(type);
+    el.textContent = text;
+    return el;
+  }
 });
