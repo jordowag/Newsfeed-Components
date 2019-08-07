@@ -112,3 +112,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+window.addEventListener("load", function(event){
+  // Accepts array of articles, where each index of the array contains an object.
+  // This object has a title, date, firstPar,secondPar,thirdPar as properties.
+  function createArticles(items) {
+    let articles = items.map((item) => {
+      let div = articleComponents("div","");
+      div.style.height = "50px";
+      div.classList.add("article");
+      let h2 = articleComponents("h2",item.title);
+      let date = articleComponents("p", item.date);
+      date.classList.add("date");
+      let p1 = articleComponents("p", item.firstParagraph);
+      let p2 = articleComponents("p", item.secondParagraph);
+      let p3 = articleComponents("p", item.thirdParagraph);
+      let button = articleComponents("span", "Click to open");
+      button.classList.add("expandButton");
+      button.addEventListener("click", (event) => {
+        if (div.style.height == "50px") {
+          TweenLite.to(div, 1, {height:400});
+          button.textContent = "Click to close";
+        } else {
+          TweenLite.to(div, 1, {height:50});
+          button.textContent = "Click to open";
+        }
+      });
+      let hideButton = articleComponents("span", "Close Article");
+      hideButton.classList.add("close-button");
+      hideButton.addEventListener("click", (e) => {
+        div.classList.add("hidden");
+      });
+      div.append(h2,date,p1,p2,p3,button, hideButton);
+      return div
+    });
+    return articles
+  }
+  
+  data.push({
+    title:"Jordan Doan's Example",
+    date:"Aug 7th, 2019",
+    firstParagraph:"Hey",
+    secondParagraph:"Chicken Nuggets",
+    thirdParagraph:"Sweet and Sour Sauce"
+  });
+
+  let articleSection = document.querySelector(".articles");
+  let articles = createArticles(data);
+  articles.forEach((article) => {
+    articleSection.append(article);
+  });
+
+  // type: STRING - tag name
+  // text: STRING - content inside tag, if applicable 
+  function articleComponents(type, text) {
+    let el = document.createElement(type);
+    el.textContent = text;
+    return el;
+  }
+});
