@@ -148,6 +148,7 @@ window.addEventListener("load", function(){
     secondParagraph:"Chicken Nuggets",
     thirdParagraph:"Sweet and Sour Sauce"
   });
+  
   let articleSection = document.querySelector(".articles");
   let articles = createArticles(data);
   articles.forEach((article) => {

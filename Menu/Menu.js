@@ -40,8 +40,7 @@ window.addEventListener("load",function(){
     let ul = document.createElement("ul");
     let elements = items.map((item) => {
       let li = document.createElement("li");
-      let textNode = document.createTextNode(item);
-      li.append(textNode);
+      li.append(document.createTextNode(item));
       return li
     });
     elements.forEach((element) => {
@@ -50,7 +49,6 @@ window.addEventListener("load",function(){
     div.append(ul);
     let menuBtn = document.querySelector(".menu-button");
     menuBtn.addEventListener("click", () => {
-      console.log("clicked!");
       div.classList.toggle("menu--open");
     });
     return div
