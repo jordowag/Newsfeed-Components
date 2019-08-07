@@ -112,10 +112,11 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
-window.addEventListener("load", function(){
+window.addEventListener("load", function(event){
   function createArticles(items) {
     let articles = items.map((item) => {
       let div = document.createElement("div");
+      div.style.height = "50px";
       div.classList.add("article");
       let h2 = document.createElement("h2");
       h2.append(document.createTextNode(item.title));
@@ -129,13 +130,30 @@ window.addEventListener("load", function(){
       let p3 = document.createElement("p");
       p3.append(document.createTextNode(item.thirdParagraph));
       let button = document.createElement("span");
+      // let close = document.createElement("span");
+      // let open = document.createElement("span");
+      // close.textContent = "Click to close";
+      // open.textContent = "Click to open";
+      // close.classList.add("hidden");
+      // button.append(close,open);
       button.classList.add("expandButton");
-      button.append(document.createTextNode("Read more"));
+      button.textContent = "Click to open";
       button.addEventListener("click", (event) => {
-        console.log("CLICKED!");
-        div.classList.toggle("article-open");
+        if (div.style.height == "50px") {
+          TweenLite.to(div, 1, {height:400});
+          button.textContent = "Click to close";
+        } else {
+          TweenLite.to(div, 1, {height:50});
+          button.textContent = "Click to open";
+        }
       });
-      div.append(h2,date,p1,p2,p3,button);
+      let hideButton = document.createElement("span");
+      hideButton.textContent = "Close Article";
+      hideButton.classList.add("close-button");
+      hideButton.addEventListener("click", (e) => {
+        div.classList.add("hidden");
+      });
+      div.append(h2,date,p1,p2,p3,button, hideButton);
       return div
     });
     return articles
@@ -148,7 +166,7 @@ window.addEventListener("load", function(){
     secondParagraph:"Chicken Nuggets",
     thirdParagraph:"Sweet and Sour Sauce"
   });
-  
+
   let articleSection = document.querySelector(".articles");
   let articles = createArticles(data);
   articles.forEach((article) => {
