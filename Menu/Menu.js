@@ -36,21 +36,27 @@ let menuItems = [
 window.addEventListener("load", function(event) {
     function createMenu(items) {
         let div = document.createElement("div");
-        div.style.left="-350px";
+        div.style.left = "-350px";
         div.classList.add("menu");
         let ul = document.createElement("ul");
+        ul.classList.add("bar-out");
         let elements = items.map((item) => {
             let li = document.createElement("li");
+            li.classList.add("bar-out");
             li.append(document.createTextNode(item));
             return li
         });
         elements.forEach((element) => {
             ul.append(element);
         });
+        div.classList.add("bar-out");
         div.append(ul);
+        div.addEventListener("click", (e) => {
+          e.stopPropagation();
+        })
         let menuBtn = document.querySelector(".menu-button");
         menuBtn.addEventListener("click", (e) => {
-            e.preventDefault();
+            e.stopPropagation();
             if (div.style.left == "-350px") {
                 TweenLite.to(div, .5, { left: 0 });
             } else {
@@ -63,13 +69,13 @@ window.addEventListener("load", function(event) {
     let navBar = createMenu(menuItems);
     let menu = document.querySelector(".header");
     menu.append(navBar);
-    // let everythingButMenu = document.querySelectorAll("div:not(.menu)"));
-    // this.console.log(everythingButMenu);
-    // everythingButMenu.forEach((el) => {
-    //     el.addEventListener("click", () => {
-    //         if (navBar.style.left == "0px") {
-    //             TweenLite.to(navBar, .5, { left: -350 });
-    //         }
-    //     });
-    // })
+    let everythingButMenu = document.querySelectorAll("*:not(.bar-out)");
+    this.console.log(everythingButMenu);
+    everythingButMenu.forEach((el) => {
+        el.addEventListener("click", (e) => {
+            if (navBar.style.left == "0px") {
+                TweenLite.to(navBar, .5, { left: -350 });
+            }
+        });
+    })
 });
