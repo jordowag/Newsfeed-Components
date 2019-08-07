@@ -112,3 +112,42 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+window.addEventListener("load", function(){
+  function createArticles(items) {
+    let articles = items.map((item) => {
+      let div = document.createElement("div");
+      div.classList.add("article");
+      let h2 = document.createElement("h2");
+      h2.append(document.createTextNode(item.title));
+      let date = document.createElement("h1");
+      date.append(document.createTextNode(item.date));
+      let p1 = document.createElement("p1");
+      p1.append(document.createTextNode(item.firstParagraph));
+      let p2 = document.createElement("p2");
+      p2.append(document.createTextNode(item.secondParagraph));
+      let p3 = document.createElement("p3");
+      p3.append(document.createTextNode(item.thirdParagraph));
+      let button = document.createElement("span");
+      button.classList.add("expandButon");
+      button.addEventListener("click", () => {
+        div.classList.toggle("article-open");
+      })
+      div.innerHTML += h2.outerHTML + date.outerHTML + p1.outerHTML + p2.outerHTML + p3.outerHTML + button.outerHTML;
+      return div
+    });
+    return articles
+  }
+  
+  data.push({
+    title:"Jordan Doan's Example",
+    date:"Aug 7th, 2019",
+    firstParagraph:"Hey",
+    secondParagraph:"Chicken Nuggets",
+    thirdParagraph:"Sweet and Sour Sauce"
+  });
+  let articleSection = document.querySelector(".articles");
+  let articles = createArticles(data);
+  articles.forEach((article) => {
+    articleSection.append(article);
+  });
+});
