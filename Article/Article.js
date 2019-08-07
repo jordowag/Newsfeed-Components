@@ -119,13 +119,14 @@ window.addEventListener("load", function(){
       div.classList.add("article");
       let h2 = document.createElement("h2");
       h2.append(document.createTextNode(item.title));
-      let date = document.createElement("h1");
+      let date = document.createElement("p");
+      date.classList.add("date");
       date.append(document.createTextNode(item.date));
-      let p1 = document.createElement("p1");
+      let p1 = document.createElement("p");
       p1.append(document.createTextNode(item.firstParagraph));
-      let p2 = document.createElement("p2");
+      let p2 = document.createElement("p");
       p2.append(document.createTextNode(item.secondParagraph));
-      let p3 = document.createElement("p3");
+      let p3 = document.createElement("p");
       p3.append(document.createTextNode(item.thirdParagraph));
       let button = document.createElement("span");
       button.classList.add("expandButton");
@@ -134,8 +135,7 @@ window.addEventListener("load", function(){
         console.log("CLICKED!");
         div.classList.toggle("article-open");
       });
-      div.innerHTML += h2.outerHTML + date.outerHTML + p1.outerHTML + p2.outerHTML + p3.outerHTML;
-      div.append(button);
+      div.append(h2,date,p1,p2,p3,button);
       return div
     });
     return articles
