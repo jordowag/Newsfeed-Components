@@ -48,14 +48,16 @@ window.addEventListener("load",function(){
       ul.append(element);
     });
     div.append(ul);
+    let menuBtn = document.querySelector(".menu-button");
+    menuBtn.addEventListener("click", () => {
+      console.log("clicked!");
+      div.classList.toggle("menu--open");
+    });
     return div
   }
 
   let navBar = createMenu(menuItems);
   let menu = document.querySelector(".header");
   menu.append(navBar);
-  let menuBtn = document.querySelector(".menu-button");
-  menuBtn.addEventListener("click", () => {
-    menu.classList.toggle("menu--open");
-  })
+
 });

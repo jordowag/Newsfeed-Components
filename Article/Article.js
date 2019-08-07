@@ -128,11 +128,14 @@ window.addEventListener("load", function(){
       let p3 = document.createElement("p3");
       p3.append(document.createTextNode(item.thirdParagraph));
       let button = document.createElement("span");
-      button.classList.add("expandButon");
-      button.addEventListener("click", () => {
+      button.classList.add("expandButton");
+      button.append(document.createTextNode("Read more"));
+      button.addEventListener("click", (event) => {
+        console.log("CLICKED!");
         div.classList.toggle("article-open");
-      })
-      div.innerHTML += h2.outerHTML + date.outerHTML + p1.outerHTML + p2.outerHTML + p3.outerHTML + button.outerHTML;
+      });
+      div.innerHTML += h2.outerHTML + date.outerHTML + p1.outerHTML + p2.outerHTML + p3.outerHTML;
+      div.append(button);
       return div
     });
     return articles
